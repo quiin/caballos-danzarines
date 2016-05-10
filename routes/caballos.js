@@ -266,10 +266,10 @@ router.put('/caballos/tirar/', (req, res) => {
 
     //--------------------------------------------------------------------------
     function guardarCambios(tablero, ren, col, pieza) {
-      // Moving piece to corresponding place.
-      tablero[ren][col] = pieza;
       // Removing piece from previous place.
       var posicion = getPosition(tablero, pieza);
+      // Moving piece to corresponding place.
+      tablero[ren][col] = pieza;
       tablero[posicion[0]][posicion[1]] = '(- | -)';
       // Changing the game turn and setting the new board.
       juego.turno = contrincante(juego.turno);
@@ -313,6 +313,7 @@ router.put('/caballos/tirar/', (req, res) => {
                               [pos[0]+2, pos[1]-1], [pos[0]+1, pos[1]-2], [pos[0]-1, pos[1]-2], [pos[0]-2, pos[1]-1]];
       for (var i = 0; i < possiblePositions.length; i++) {
         if (possiblePositions[i][0] === row && possiblePositions[i][1] === col) {
+          console.log("Position to move (r, c): " + row + " " + col);
           return true;
         }
       }
@@ -323,7 +324,6 @@ router.put('/caballos/tirar/', (req, res) => {
     if (err) {
       console.log(err);
       res.json(resultado);
-
     } else {
       let simbolo = jugador.simbolo;
       let ren = convertirEntero(req.body.ren);
@@ -335,7 +335,6 @@ router.put('/caballos/tirar/', (req, res) => {
         } else {
           res.json(resultado);
         }
-
       } else {
         res.json(resultado);
       }

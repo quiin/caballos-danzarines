@@ -87,7 +87,7 @@ function crearJuego() {
     } else {
       servicioWeb.invocar(
         'POST',
-        '/gato/crear_juego/',
+        '/caballos/crear_juego/',
         {'nombre': arr[0],
          'renglones': arr[1],
          'columnas': arr[2]
@@ -128,7 +128,7 @@ function errorFatal(mensaje) {
 function esperarTurno(callback) {
   servicioWeb.invocar(
     'GET',
-    '/gato/estado/',
+    '/caballos/estado/',
     {},
     resultado => {
       if (resultado.estado === 'espera') {
@@ -233,7 +233,7 @@ function jugar(symbol) {
       imprimirTablero(tablero);
       servicioWeb.invocar(
         'GET',
-        '/gato/estado/',
+        '/caballos/estado/',
         {},
         resultado => {
           if (juegoTerminado(resultado.estado)) {
@@ -267,7 +267,7 @@ function jugar(symbol) {
       leerNumero(0, 9, 2, opcion => {
         servicioWeb.invocar(
           'PUT',
-          '/gato/tirar/',
+          '/caballos/tirar/',
           { ren: parseInt(opcion[0]), col: parseInt(opcion[1]) },
           resultado => {
             if (resultado.efectuado) {
@@ -384,7 +384,7 @@ function unirJuego() {
 
   servicioWeb.invocar(
     'GET',
-    '/gato/juegos_existentes/',
+    '/caballos/juegos_existentes/',
     {},
     juegos => {
       if (juegos.length === 0) {
@@ -398,7 +398,7 @@ function unirJuego() {
           } else {
             servicioWeb.invocar(
               'PUT',
-              '/gato/unir_juego/',
+              '/caballos/unir_juego/',
               { id_juego: juegos[opcion].id },
               verificarUnion
             );
