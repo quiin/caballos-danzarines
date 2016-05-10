@@ -1,0 +1,131 @@
+
+body {
+    margin-right: 2em;
+    margin-left: 2em;
+    margin-bottom: 2em;
+    font-family: sans-serif;    
+    color: Black;
+    background-image: url("/images/wallpaper.png");    
+    
+}
+
+h1 {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    font-size: 5em;
+}
+
+h2 {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    font-size: 3em;    
+}
+
+
+td {
+  font-size: 3em;  
+  width: 2em;   
+  height: 3em;    
+  text-align: center;  
+}
+
+footer {
+    font-size: 80%;
+    margin-top: 20px;
+    color: DimGray;
+}
+
+.ganador {
+    color: White;
+    background-color: Red;
+}
+
+.invisible {
+    display: none;
+}
+
+.resalta {
+    color: White;
+    background-color: Red;
+    padding: 4px 15px;
+}
+
+.seleccionable:hover {
+    background-color:  #ccccff;
+    cursor: pointer;
+}
+
+.playerA{
+  color: white;
+}
+
+.playerB{
+  color: black;
+}
+
+#seccion_mensajes {
+    min-height: 120px;
+}
+
+.centrado{
+    text-align: center;
+}
+
+.cancelar{
+    margin-left: 2em;
+}
+
+div.centrado table 
+{
+    margin: 0 auto; 
+    text-align: left;
+    margin-top: 5em;
+}
+
+select {
+  margin: 50px;
+  border: 1px solid #111;
+  background: transparent;
+  width: 150px;
+  padding: 5px 35px 5px 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  height: 34px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url('/images/horse.png') 96% / 15% no-repeat #eee;
+} 
+
+
+/*device specific*/
+@media (max-width: 767px) {
+  .btn-responsive {
+    padding:1em 1.2em;
+    font-size: 1.5em;
+    margin-top: 2em;
+    border-radius: 1em;
+  }
+
+
+  label {
+    font-size: 2em;    
+  }
+
+  input[type=text] {
+    height: 3em;
+  }
+
+  p,input,div,span,h4 {
+    font-size: 90%;
+  }
+  h1 {
+    font-size: 3em;  
+  }
+  h2 {
+    font-size: 18px;  
+  }
+  h3 {
+    font-size: 14px;  
+  }
+}

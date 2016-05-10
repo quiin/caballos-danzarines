@@ -1,0 +1,179 @@
+<%
+/*******************************************************************************
+ * Juego de Gato distribuido
+ * Aplicación de página única (SPA: Single-Page Application).
+ * Copyright (C) 2013-2016 por Ariel Ortiz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ ******************************************************************************/
+%>
+
+<!DOCTYPE html>
+
+<html lang="es">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>Caballos Danzarínes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css" />
+    <link rel="stylesheet" href="/stylesheets/range-input.css" />
+    <link rel="stylesheet" href="/stylesheets/cliente-web-gato.css" />      
+    <link rel="stylesheet" href="/remodal/dist/remodal-default-theme.css "> 
+    <link rel="stylesheet" href="/remodal/dist/remodal.css">     
+    <script src="/javascripts/jquery-1.11.3.min.js"></script>
+    <script src="/javascripts/cliente-web-gato.js"></script>
+    <script src="/remodal/dist/remodal.min.js"></script>
+  </head>
+
+  <body>
+
+    <div class = 'container centrado remodal-bg'>
+      <!--  -->      
+      <div id="titulo" class = 'col-sm-offset-0 col-sm-12 col-md-offset-2 col-md-8 col-xs-12'>
+        <img src="/images/horse.png" alt="" width="200" height="200"/>
+        <h1> Caballos Danzarínes </h1>
+      </div>
+
+      <!--  -->
+      <div id="seccion_menu" class="col-sm-offset-0 col-sm-12 col-md-offset-2 col-md-8 col-xs-12">
+        <!-- DEBUG MODAL -->
+        <!-- <a href="#modal">Call the modal with data-remodal-id="modal"</a>     -->
+        <p>
+          <button id="boton_crear_juego" class = 'btn btn-info btn-responsive btn-large'>
+            <span class="glyphicon glyphicon-plus"></span> Crear Juego Nuevo
+          </button>
+          <button id="boton_unir_juego" class = 'btn btn-info btn-responsive btn-large'>
+            <span class="glyphicon glyphicon-globe"></span> Unirse
+          </button>
+        </p>
+      </div>
+
+      <!--  -->
+      <div id="seccion_error" class="invisible col-sm-offset-0 col-sm-12 col-md-offset-2 col-md-8 col-xs-12">
+        <h2>
+          <span class="resalta">
+            <strong>
+              Error:
+            </strong>
+            <span id="mensaje_error">
+            </span>
+          </span>
+        </h2>
+        <button class="regresar_al_menu btn btn-info btn-responsive btn-large">
+          Menú principal
+        </button>        
+      </div>
+
+      <!--  -->
+      <div id="seccion_mensajes" class="invisible ccol-sm-offset-0 col-sm-12 col-md-offset-2 col-md-8 col-xs-12">
+        <h2 id="mensaje_1">
+        </h2>
+        <h2 id="mensaje_2">
+          Tú tiras con: <strong id="simbolo"></strong>
+        </h2>
+        <h2 id="mensaje_3">
+        </h2>
+        <button id='boton_mensajes_regresar_al_menu' class="invisible regresar_al_menu btn btn-info btn-responsive btn-large">
+          Menú principal
+        </button>
+      </div>
+
+      <!--  -->
+      <div id="seccion_solicitar_nombre" class="invisible col-sm-offset-0 col-sm-12 col-md-offset-2 col-md-8 col-xs-12">
+        <form id="form_nombre_del_juego" role='form'>
+          <div class="form-group">
+            <label for="nombre_del_juego">Nombre:</label>
+            <input id="nombre_del_juego" type="text" class="form-control" />                  
+          </div>
+
+          <div class="form-group">            
+            <label for="numero_de_renglones">Renglones:</label>      
+            <input id="numero_de_renglones" type="range" min="4" max = "10" value='4'/>
+            <h2 id= 'ren_change'> 4</h2>
+          </div>
+
+          <div class="form-group">            
+            <label for="numero_de_columnas">Columnas</label>        
+            <input id="numero_de_columnas"type="range" min="4" max = "10" value='4'/>
+            <h2 id= 'col_change'> 4</h2>
+          </div>
+          
+                                            
+
+          <p>
+            <button id="boton_continuar_crear_juego" class="btn btn-success btn-large btn-responsive">
+              <span class="glyphicon glyphicon-ok"></span> Continuar
+            </button>
+            <button class="regresar_al_menu btn btn-danger btn-large btn-responsive cancelar">
+              <span class="glyphicon glyphicon-remove"></span> Cancelar
+            </button>
+          </p>
+        </form>
+      </div>
+
+      <!--  -->
+      <div id="seccion_sin_juegos" class="invisible col-sm-offset-0 col-sm-12 col-md-offset-2 col-md-8 col-xs-12">
+        <h2>
+          No hay juegos disponibles.
+        </h2>        
+        <button class="regresar_al_menu btn btn-info btn-responsive btn-large">
+          Menú principal
+        </button>
+      </div>
+
+      <!--  -->
+      <div id="seccion_lista_juegos" class="invisible col-sm-offset-0 col-sm-12 col-md-offset-2 col-md-8 col-xs-12">
+        <form id="form_lista_juegos">
+          <p>
+            <label for="lista_juego">
+              ¿A qué juego deseas unirte?
+            </label>
+            <select id="lista_juego" name="nombre">
+            </select>
+          </p>
+          <p>
+
+            
+            <button id="boton_continuar_unir_juego"class="btn btn-success btn-large btn-responsive">
+              <span class="glyphicon glyphicon-ok"></span> Continuar
+            </button>
+            <button class="regresar_al_menu btn btn-danger btn-large btn-responsive cancelar">
+              <span class="glyphicon glyphicon-remove"></span> Cancelar
+            </button>
+          </p>
+        </form>
+      </div>
+
+      <!--  -->
+      <div id="seccion_tablero" class="invisible col-sm-offset-0 col-sm-12 col-md-offset-2 col-md-8 col-xs-12">
+        
+      </div>              
+      
+    </div>
+    <!-- <div class="modal">Place at bottom of page</div> -->
+    <div class="remodal" data-remodal-id="modal" 
+      data-remodal-options='closeOnOutsideClick: false, closeOnEscape: false'>      
+      <h3 id = 'estado'></h3>
+      <img src="/images/loading.gif" alt="Esperando">
+      <br>
+      <br>      
+      <p id = 'estado_desc'></p>
+      <br>
+      <span id='button-here'></span>
+      <!-- <button data-remodal-action="confirm" style='visibility: hiddden;' class="remodal-confirm">OK</button> -->
+    </div>
+
+  </body>
+
+</html>
